@@ -1,0 +1,60 @@
+{
+  "Connexion" : "Connexion",
+  "Inscription" : "Inscription",
+  "Nom" : "Nom",
+  "Mot de passe" : "Mot de passe",
+  "Confirmaton du mot de passe" : "Confirmation du mot de passe",
+  "Connexion en cours..." : "Connexion en cours...",
+  "login deja utilise" : "login deja utilise",
+  "Compte introuvable" : "Compte introuvable",
+  "OK" : "OK",
+
+  "Inscription en cours..." : "Inscription en cours...",
+  "Nom utilisateur trop court" : "Nom utilisateur trop court",
+  "Nom utilisateur deja pris" : "Nom utilisateur deja pris",
+  "Mot de passe trop court" : "Mot de passe trop court",
+  "Les mots de passe ne sont pas identiques" : "Les mots de passe ne sont pas identiques",
+
+  "Veuillez saisir des informations" : "Veuillez saisir des informations",
+
+  "Erreur réseau" : "Erreur réseau",
+
+  "Chargement en cours..." : "Chargement en cours...",
+
+  "Changement en cours..." : "Changement en cours...",
+
+  "Chargement des détails..." : "Chargement des détails...",
+
+  "Selectionnes une image" : "Selectionnes une image",
+
+  "Deconnexion en cours..." :   "Deconnexion en cours..." ,
+
+  "Creation de tache" : "Création de tache",
+  "Entrer une date" : "Entrer une date",
+  "Nom de la tache" : "Nom de la tache",
+  "Creation" : "Création",
+  "Création de la tache en cours..." : "Création de la tache en cours...",
+  "Le nom de tache entre existe deja" : "Le nom de tache entre existe deja",
+  "Le nom de tache entre est trop court" : "Le nom de tache entre est trop court",
+  "Nom de tache non entre" : "Nom de tache non entre",
+
+  "Consultation" : "Consultation",
+  "Nom de la tache" : "Nom de la tache",
+  "Date decheance de la tache" : "Date d'écheance de la tache",
+  "Pourcentage davancement" : "Pourcentage d'avancement",
+  "Pourcentage de temps ecoule" : "Pourcentage de temps écoulé",
+  "Entrer le nouveau pourcentage" : "Entrer le nouveau pourcentage",
+  "Enregistrement du nouveau pourcentage" : "Enregistrement du nouveau pourcentage",
+  "Aucune image pour cette tache" : "Aucune image pour cette tache",
+  "Pourcentage doit etre inferieur ou egal a 100" : "Pourcentage doit etre inferieur ou egal a 100",
+
+  "Inscrivez un nom de tache" : "Inscrivez un nom de tache",
+
+  "Accueil" : "Accueil",
+  "Aucune image" : "Aucune image",
+
+  "Ajout de taches" : "Ajout de taches",
+
+  "Deconnexion" : "Deconnexion"
+
+}

@@ -1,0 +1,60 @@
+{
+  "Connexion" : "Connection",
+  "Inscription" : "Inscription",
+  "Nom" : "Username",
+  "Mot de passe" : "Password",
+  "Confirmaton du mot de passe" : "Password confirmation",
+  "Connexion en cours..." : "A connection occurs...",
+  "login deja utilise" : "Informations already use",
+  "Compte introuvable" : "Account not found",
+  "OK" : "OK",
+
+  "Inscription en cours..." : "An inscription occurs...",
+  "Nom utilisateur trop court" : "Username too short",
+  "Nom utilisateur deja pris" : "Username already taken",
+  "Mot de passe trop court" : "Password too short",
+  "Les mots de passe ne sont pas identiques" : "Passwords are not the same",
+
+  "Erreur réseau" : "Error Network",
+
+  "Chargement en cours..." : "Loading...",
+
+  "Changement en cours..." : "Changes occur...",
+
+  "Chargement des détails..." : "Loading details...",
+
+  "Selectionnes une image" : "Select an image",
+
+  "Deconnexion en cours..." : "A Deconnection occurs...",
+
+  "Veuillez saisir des informations" : "Enter Information",
+
+  "Creation de tache" : "Create a task",
+  "Entrer une date" : "Enter a date",
+  "Nom de la tache" : "Task's name",
+  "Creation" : "Creation",
+  "Création de la tache en cours..." : "Creating task in progress...",
+  "Le nom de tache entre existe deja" : "Task's name already taken",
+  "Le nom de tache entre est trop court" : "Task's name too short",
+  "Nom de tache non entre" : "Task's name space empty",
+
+
+  "Consultation" : "Consultation",
+  "Nom de la tache" : "Task's name",
+  "Date decheance de la tache" : "Task's deadline",
+  "Pourcentage davancement" : "Percentage of completion",
+  "Pourcentage de temps ecoule" : "Percentage of time elapsed",
+  "Entrer le nouveau pourcentage" : "Enter a new percentage",
+  "Enregistrement du nouveau pourcentage" : "Saving the new percentage",
+  "Aucune image pour cette tache" : "No image for this task",
+  "Pourcentage doit etre inferieur ou egal a 100" : "The percentage must be less than or equal to 100",
+
+  "Inscrivez un nom de tache" : "Enter a task name",
+
+  "Accueil" : "Welcome",
+  "Aucune image" : "No image",
+
+  "Ajout de taches" : "Add tasks",
+
+  "Deconnexion" : "Deconnection"
+}
