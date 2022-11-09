@@ -18,6 +18,8 @@ class EcranConnexion extends StatefulWidget {
 
 class _EcranConnexionState extends State<EcranConnexion> {
 
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -120,6 +122,21 @@ class _EcranConnexionState extends State<EcranConnexion> {
                 ),
               ),
             ),
+             Center(
+               child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:
+                MaterialButton(
+                  onPressed: () async {
+                    await GoogleSignIn().signOut();
+                    await FirebaseAuth.instance.signOut();
+                    setState(() {});
+                  },
+                  child: Text("signout"),
+                  color: Colors.blue,
+                ),
+            ),
+             ),
           ],
         ),
     //  ),
@@ -150,6 +167,21 @@ class _EcranConnexionState extends State<EcranConnexion> {
                 color: Colors.blue,
                 onPressed:
                 signInWithGoogle,
+              ),
+            ),
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:
+              MaterialButton(
+                onPressed: () async {
+                  await GoogleSignIn().signOut();
+                  await FirebaseAuth.instance.signOut();
+                  setState(() {});
+                },
+                child: Text("signout"),
+                color: Colors.blue,
               ),
             ),
           ),
