@@ -70,113 +70,9 @@ class _EcranConnexionState extends State<EcranConnexion> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  // connexion() async {
-  //   if(nomConnexion == "" || passwordConnexion == ""){
-  //     showDialog<String>(
-  //       context: context,
-  //       builder: (BuildContext context) => AlertDialog(
-  //         // title: const Text('AlertDialog Title'),
-  //         content:  Text(Locs.of(context).trans("Veuillez saisir des informations")),
-  //         actions: <Widget>[
-  //           TextButton(
-  //             onPressed: () => Navigator.pop(context, 'OK'),
-  //             child: const Text('OK'),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  //   else{
-  //     try {
-  //       WidgetsBinding.instance.addPostFrameCallback((_) {
-  //         showLoaderDialog(context);
-  //       });
-  //       SigninRequest req = SigninRequest();
-  //       req.username = nomConnexion;
-  //       req.password = passwordConnexion;
-  //       var reponse = await signin(req);
-  //       print(reponse);
-  //       Navigator.pop(context);
-  //       Navigator.push(
-  //         context,
-  //         MaterialPageRoute(
-  //           builder: (context) => EcranAccueil(),
-  //         ),
-  //       );
-  //
-  //     } on DioError catch(e) {
-  //       print(e);
-  //       Navigator.of(context).pop();
-  //       if(e.response == null)
-  //       {
-  //         showDialog<String>(
-  //           context: context,
-  //           builder: (BuildContext context) => AlertDialog(
-  //             // title: const Text('AlertDialog Title'),
-  //             content:  Text(Locs.of(context).trans("Erreur réseau")),
-  //             actions: <Widget>[
-  //               TextButton(
-  //                 onPressed: () => Navigator.pop(context, 'OK'),
-  //                 child: const Text('OK'),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       }
-  //       else{
-  //         String message = e.response!.data;
-  //         if (message == "BadCredentialsException") {
-  //           showDialog<String>(
-  //             context: context,
-  //             builder: (BuildContext context) => AlertDialog(
-  //               // title: const Text('AlertDialog Title'),
-  //               content:  Text(Locs.of(context).trans("Compte introuvable")),
-  //               actions: <Widget>[
-  //                 TextButton(
-  //                   onPressed: () => Navigator.pop(context, 'OK'),
-  //                   child: const Text('OK'),
-  //                 ),
-  //               ],
-  //             ),
-  //           );
-  //         }
-  //         else if(message == "InternalAuthenticationServiceException")
-  //         {
-  //           showDialog<String>(
-  //             context: context,
-  //             builder: (BuildContext context) => AlertDialog(
-  //               // title: const Text('AlertDialog Title'),
-  //               content:  Text(Locs.of(context).trans("Compte introuvable")),
-  //               actions: <Widget>[
-  //                 TextButton(
-  //                   onPressed: () => Navigator.pop(context, 'OK'),
-  //                   child: const Text('OK'),
-  //                 ),
-  //               ],
-  //             ),
-  //           );
-  //         }
-  //         else {
-  //           print('autre erreurs');
-  //           ScaffoldMessenger.of(context).showSnackBar(
-  //               SnackBar(
-  //                   content: Text('Erreur authentification')
-  //               )
-  //           );
-  //         }
-  //
-  //       }
-  //
-  //     }
-  //
-  //   }
-  //
-  // }
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -206,24 +102,27 @@ class _EcranConnexionState extends State<EcranConnexion> {
       //   title: Text(Locs.of(context).trans('Connexion')),
       // ),
       body:
-      SingleChildScrollView(
-        child: Column(
+    //  SingleChildScrollView(
+      //  child:
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             //Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child:
-              MaterialButton(
-                child: Text(Locs.of(context).trans('Connexion')),
-                color: Colors.blue,
-                onPressed:
-                signInWithGoogle,
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:
+                MaterialButton(
+                  child: Text(Locs.of(context).trans('Connexion')),
+                  color: Colors.blue,
+                  onPressed:
+                  signInWithGoogle,
+                ),
               ),
             ),
           ],
         ),
-      ),
+    //  ),
     );
   }
 
@@ -237,81 +136,26 @@ class _EcranConnexionState extends State<EcranConnexion> {
       //   // the App.build method, and use it to set our appbar title.
       //   title: Text(Locs.of(context).trans('Connexion')),
       // ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
-            Padding(
-              padding: const EdgeInsets.all(50),
-              child: TextFormField(
-                  decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
-                      labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Colors.grey
-                        ),
-                      )),
-                  onChanged: (nom) {
-                    nomConnexion = nom;
-                  }
+      body:
+        Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          //Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:
+              MaterialButton(
+                child: Text(Locs.of(context).trans('Connexion')),
+                color: Colors.blue,
+                onPressed:
+                signInWithGoogle,
               ),
             ),
-            // const Text(
-            //   'Mot de passe',
-            // ),
-            Padding(
-              padding: const EdgeInsets.all(50),
-              child: TextFormField(
-                  decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
-                      labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Colors.grey
-                        ),
-                      )),
-                  obscureText: true,
-                  onChanged: (password) {
-                    passwordConnexion = password;
-                  }
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: MaterialButton(
-                //     child: Text(Locs.of(context).trans('Connexion')),
-                //     color: Colors.blue,
-                //     onPressed:
-                //     connexion,
-                //   ),
-                // ),
-
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: MaterialButton(
-                //     onPressed: () {
-                //       Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //           builder: (context) => EcranInscription(),
-                //         ),
-                //       );
-                //     },
-                //     child: Text(Locs.of(context).trans('Inscription')),
-                //     color: Colors.blue,
-                //   ),
-                // ),
-              ],
-            ),
-
-          ],
-        ),
+          ),
+        ],
       ),
+
     );
   }
 
