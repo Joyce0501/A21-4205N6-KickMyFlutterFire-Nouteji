@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/ecran_accueil.dart';
+import 'package:flutter_firebase/ecran_creation.dart';
+import 'package:flutter_firebase/tiroir_nav.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:kick_my_flutter/ecran_inscription.dart';
 // import 'package:dio/dio.dart';
@@ -68,6 +71,13 @@ class _EcranConnexionState extends State<EcranConnexion> {
       idToken: googleAuth?.idToken,
     );
 
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EcranAccueil(),
+      ),
+    );
+
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
@@ -97,7 +107,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // TODO decommenter la ligne suivante
-      //  drawer: LeTiroir(),
+        drawer: LeTiroir(),
       // appBar: AppBar(
       //   // Here we take the value from the MyHomePage object that was created by
       //   // the App.build method, and use it to set our appbar title.
@@ -147,7 +157,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // TODO decommenter la ligne suivante
-      //  drawer: LeTiroir(),
+       drawer: LeTiroir(),
       // appBar: AppBar(
       //   // Here we take the value from the MyHomePage object that was created by
       //   // the App.build method, and use it to set our appbar title.
