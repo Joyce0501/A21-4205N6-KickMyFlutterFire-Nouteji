@@ -1,26 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
- addTask(String nomtache,DateTime unedate) async{
+List<QueryDocumentSnapshot<Map<String, dynamic>>> taches = [];
 
+ addTask(String nomtache,DateTime unedate, String userid) async{
   CollectionReference taskscollection = FirebaseFirestore.instance.collection("tasks");
   taskscollection.add({
     'name' : nomtache,
     'taskDateCreation' : unedate,
+    'userid' : userid
   });
-
-
-  // final db = FirebaseFirestore.instance;
-  // // Create a new user with a first and last name
-  // final task = <String, dynamic>{
-  //   "name": nomtache,
-  //   "taskDateCreation": unedate,
-  // };
-  // db.collection("users").add(task).then((DocumentReference doc) =>
-  //     print('DocumentSnapshot added with ID: ${doc.id}'));
 }
 
- getTask() async {
-  CollectionReference taskscollection = FirebaseFirestore.instance.collection("tasks");
-  var results = await taskscollection.get();
-  var taskdocs = results.docs;
+ Future < List<QueryDocumentSnapshot<Map<String, dynamic>>> > getTask() async {
+   try{
+     final db = FirebaseFirestore.instance;
+     CollectionReference taskscollection = db.collection("tasks");
+     var results = await db.collection("tasks").where("userid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get();
+     var taskdocs = results.docs;
+     taches = taskdocs;
+   }
+  catch (e){
+     print (e);
+  }
+   return taches;
 }

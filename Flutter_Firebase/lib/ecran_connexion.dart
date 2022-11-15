@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/ecran_accueil.dart';
 import 'package:flutter_firebase/ecran_creation.dart';
+import 'package:flutter_firebase/service.dart';
 import 'package:flutter_firebase/tiroir_nav.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:kick_my_flutter/ecran_inscription.dart';
@@ -33,9 +34,15 @@ class _EcranConnexionState extends State<EcranConnexion> {
         print('User is currently signed out!');
       } else {
         print('User is signed in! ' + user.email!);
+        userok();
       }
     });
     super.initState();
+  }
+
+  userok() async{
+    await getTask();
+    Navigator.pushNamedAndRemoveUntil(context, '/ecranaccueil', (route) => false);
   }
 
   String nomConnexion = "";
@@ -70,7 +77,6 @@ class _EcranConnexionState extends State<EcranConnexion> {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-
     Navigator.push(
       context,
       MaterialPageRoute(

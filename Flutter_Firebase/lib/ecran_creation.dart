@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/ecran_accueil.dart';
 import 'package:flutter_firebase/service.dart';
 import 'package:intl/intl.dart';
 // import 'package:kick_my_flutter/ecran_accueil.dart';
@@ -23,6 +25,7 @@ class _EcranCreationState extends State<EcranCreation> {
   TextEditingController dateinput = TextEditingController();
   String nomtache = "";
   DateTime unedate = DateTime.now();
+
 //  List<HomeItemResponse> listetache = [];
 
   showLoaderDialog(BuildContext context){
@@ -151,10 +154,10 @@ class _EcranCreationState extends State<EcranCreation> {
   
   @override
   void initState() {
-    dateinput.text = "";
+  //  dateinput.text = "";
     //set the initial value of text field
     super.initState();
-    initFirebase();
+  //  initFirebase();
   }
 
   void initFirebase() async{
@@ -192,7 +195,8 @@ class _EcranCreationState extends State<EcranCreation> {
         // the App.build method, and use it to set our appbar title.
         title: Text(Locs.of(context).trans('Creation')),
       ),
-      body: OrientationBuilder(
+      body:
+      OrientationBuilder(
         builder: (context, orientation) {
           if (orientation == Orientation.landscape) {
             return buildPaysage();
@@ -200,7 +204,7 @@ class _EcranCreationState extends State<EcranCreation> {
             return buildPortrait();
           }
         },
-      ),
+      )
     );
   }
 
@@ -289,8 +293,18 @@ class _EcranCreationState extends State<EcranCreation> {
                   padding: const EdgeInsets.all(8.0),
                   child: Expanded(
                     child: MaterialButton(
-                      onPressed:
-                      addTask(nomtache,unedate),
+                      onPressed: () async {
+                       //  if(nomtache.trim().isNotEmpty || unedate.isAfter(DateTime.now()) ){
+                          await addTask(nomtache,unedate,(FirebaseAuth.instance.currentUser?.uid).toString());
+                          await getTask();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EcranAccueil(),
+                            ),
+                          );
+                       // }
+                      },
                       child: Text(Locs.of(context).trans('Accueil')),
                       color: Colors.blue,
                    ),

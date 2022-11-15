@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/service.dart';
+import 'package:flutter_firebase/tiroir_nav.dart';
 import 'package:intl/intl.dart';
 // import 'package:kick_my_flutter/ecran_consultation.dart';
 // import 'package:kick_my_flutter/ecran_creation.dart';
@@ -46,12 +47,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
     );
   }
 
-  var taskdocs;
-  getTask() async {
-    CollectionReference taskscollection = FirebaseFirestore.instance.collection("tasks");
-    var results = await taskscollection.get();
-    taskdocs = results.docs;
-  }
 
   @override
   void initState() {
@@ -59,13 +54,15 @@ class _EcranAccueilState extends State<EcranAccueil> {
     initializeDateFormatting("fr-FR", null);
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: LeTiroir(),
       resizeToAvoidBottomInset: false,
       // TODO decommenter la ligne suivante
       //  drawer: LeTiroir(),
-     //   drawer: LeTiroir(),
+      //  drawer: LeTiroir(),
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -74,7 +71,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
 
       body:
         ListView.builder(
-     //     itemCount: taskdocs.length,
+          itemCount: taches.length,
           scrollDirection: Axis.vertical,
           prototypeItem: ListTile(
             title: Text("hello"),
@@ -142,7 +139,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                     // leading: CircleAvatar(
                     //   backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()),
                     //   ),
-                    title: Text( this.taskdocs[index].data()['name'],
+                    title: Text( taches[index].data()['name'],
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                   //      color: Colors.black,
