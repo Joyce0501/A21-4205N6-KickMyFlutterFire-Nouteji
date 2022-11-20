@@ -154,6 +154,7 @@ class LeTiroirState extends State<LeTiroir> {
             () async {
             await GoogleSignIn().signOut();
             await FirebaseAuth.instance.signOut();
+            Navigator.pushNamedAndRemoveUntil(context, '/ecranconnexion', (route) => false);
             setState(() {});
           },
         ),
