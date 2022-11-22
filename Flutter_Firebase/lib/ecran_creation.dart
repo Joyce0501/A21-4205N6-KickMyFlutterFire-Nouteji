@@ -23,8 +23,11 @@ class EcranCreation extends StatefulWidget {
 class _EcranCreationState extends State<EcranCreation> {
 
   TextEditingController dateinput = TextEditingController();
+  TextEditingController dateinput1 = TextEditingController();
   String nomtache = "";
-  DateTime unedate = DateTime.now();
+  DateTime unedateDebut = DateTime.now();
+  DateTime unedateFin = DateTime.now();
+  late int percentageDone;
 
 //  List<HomeItemResponse> listetache = [];
 
@@ -159,10 +162,10 @@ class _EcranCreationState extends State<EcranCreation> {
     super.initState();
   //  initFirebase();
   }
-
-  void initFirebase() async{
-    await Firebase.initializeApp();
-  }
+  //
+  // void initFirebase() async{
+  //   await Firebase.initializeApp();
+  // }
 
   // void addTask() async{
   //   CollectionReference taskscollection = FirebaseFirestore.instance.collection("tasks");
@@ -199,7 +202,7 @@ class _EcranCreationState extends State<EcranCreation> {
       OrientationBuilder(
         builder: (context, orientation) {
           if (orientation == Orientation.landscape) {
-            return buildPaysage();
+            return buildPortrait();
           } else {
             return buildPortrait();
           }
@@ -244,6 +247,22 @@ class _EcranCreationState extends State<EcranCreation> {
                     }
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: TextFormField(
+                      decoration: InputDecoration(labelText: "Pourcentage",
+                          labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                                color: Colors.grey
+                            ),
+                          )),
+                      onChanged: (percentage) {
+                        percentageDone = int.parse(percentage);
+                      }
+                  ),
+                ),
 
                 Padding(
                   padding: const EdgeInsets.all(50),
@@ -270,7 +289,7 @@ class _EcranCreationState extends State<EcranCreation> {
                           lastDate: DateTime(2101),
                       );
 
-                      unedate = pickedDate!;
+                      unedateDebut = pickedDate!;
 
 
                       if(pickedDate != null ){
@@ -290,19 +309,83 @@ class _EcranCreationState extends State<EcranCreation> {
                 ),
 
                 Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: TextFormField(
+
+                    controller: dateinput1, //editing controller of this TextField
+                    decoration: InputDecoration(
+                      //icon: Icon(Icons.calendar_today), //icon of text field
+                        labelText: Locs.of(context).trans('Entrer une date') ,//label text of field
+                        labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                              color: Colors.grey
+                          ),
+                        )
+                    ),
+                    readOnly: true,  //set it true, so that user will not able to edit text
+                    onTap: () async {
+
+                      DateTime? pickedDate1 = await showDatePicker(
+                        context: context, initialDate: DateTime.now(),
+                        firstDate: DateTime(1900), //DateTime.now() - not to allow to choose before today.
+                        lastDate: DateTime(2101),
+                      );
+
+                      unedateFin = pickedDate1!;
+
+
+                      if(pickedDate1 != null ){
+                        print(pickedDate1);  //pickedDate output format => 2021-03-10 00:00:00.000
+                        String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate1);
+                        print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                        //you can implement different kind of Date Format here according to your requirement
+
+                        setState(() {
+                          dateinput1.text = formattedDate; //set output date to TextField value.
+                        });
+                      }else{
+                        print("Date is not selected");
+                      }
+                    },
+                  ),
+                ),
+
+                Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Expanded(
                     child: MaterialButton(
                       onPressed: () async {
-                       //  if(nomtache.trim().isNotEmpty || unedate.isAfter(DateTime.now()) ){
-                          await addTask(nomtache,unedate,(FirebaseAuth.instance.currentUser?.uid).toString());
-                          await getTask();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EcranAccueil(),
-                            ),
-                          );
+                         try{
+                           print("a");
+
+                           //showLoaderDialog(context);
+
+                           await addTask(nomtache,unedateDebut,unedateFin,percentageDone,(FirebaseAuth.instance.currentUser?.uid).toString());
+                           print("b");
+                           //Navigator.pop(context);
+                           print("c");
+
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                               builder: (context) => EcranAccueil(),
+                             ),
+                           );
+                         }
+                         catch(e){
+                           print("z");
+                           print(e);
+                           Navigator.of(context).pop();
+                         }
+                       //   await getTask();
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => EcranAccueil(),
+                          //   ),
+                          // );
                        // }
                       },
                       child: Text(Locs.of(context).trans('Accueil')),
@@ -316,100 +399,100 @@ class _EcranCreationState extends State<EcranCreation> {
     );
   }
 
-  Widget buildPaysage() {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // TODO decommenter la ligne suivante
-     // drawer: LeTiroir(),
-      // appBar: AppBar(
-      //   // Here we take the value from the MyHomePage object that was created by
-      //   // the App.build method, and use it to set our appbar title.
-      //   title: Text(Locs.of(context).trans('Creation')),
-      // ),
-      body: SingleChildScrollView(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(Locs.of(context).trans('Creation de tache'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
-
-              // const Text(
-              //   'Nom',
-              // ),
-              Padding(
-                padding: const EdgeInsets.all(50),
-                child: TextFormField(
-                    decoration: InputDecoration(labelText: Locs.of(context).trans('Nom de la tache'),
-                        labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                              color: Colors.grey
-                          ),
-                        )),
-                    onChanged: (nom) {
-                      nomtache = nom;
-                    }
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.all(50),
-                child: TextFormField(
-
-                  controller: dateinput, //editing controller of this TextField
-                  decoration: InputDecoration(
-                    //icon: Icon(Icons.calendar_today), //icon of text field
-                      labelText: Locs.of(context).trans('Entrer une date') ,//label text of field
-                      labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Colors.grey
-                        ),
-                      )
-                  ),
-                  readOnly: true,  //set it true, so that user will not able to edit text
-                  onTap: () async {
-
-                    DateTime? pickedDate = await showDatePicker(
-                      context: context, initialDate: DateTime.now(),
-                      firstDate: DateTime(1900), //DateTime.now() - not to allow to choose before today.
-                      lastDate: DateTime(2101),
-                    );
-
-                    unedate = pickedDate!;
-
-
-                    if(pickedDate != null ){
-                      print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
-                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                      print(formattedDate); //formatted date output using intl package =>  2021-03-16
-                      //you can implement different kind of Date Format here according to your requirement
-
-                      setState(() {
-                        dateinput.text = formattedDate; //set output date to TextField value.
-                      });
-                    }else{
-                      print("Date is not selected");
-                    }
-                  },
-                ),
-              ),
-
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: Expanded(
-              //     child: MaterialButton(
-              //       onPressed:
-              //       creationtaches,
-              //       child: Text(Locs.of(context).trans('Accueil')),
-              //       color: Colors.blue,
-              //     ),
-              //   ),
-              // ),
-            ]
-        ),
-      ),
-    );
-  }
+  // Widget buildPaysage() {
+  //   return Scaffold(
+  //     resizeToAvoidBottomInset: false,
+  //     // TODO decommenter la ligne suivante
+  //    // drawer: LeTiroir(),
+  //     // appBar: AppBar(
+  //     //   // Here we take the value from the MyHomePage object that was created by
+  //     //   // the App.build method, and use it to set our appbar title.
+  //     //   title: Text(Locs.of(context).trans('Creation')),
+  //     // ),
+  //     body: SingleChildScrollView(
+  //       child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: <Widget>[
+  //             Text(Locs.of(context).trans('Creation de tache'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+  //
+  //             // const Text(
+  //             //   'Nom',
+  //             // ),
+  //             Padding(
+  //               padding: const EdgeInsets.all(50),
+  //               child: TextFormField(
+  //                   decoration: InputDecoration(labelText: Locs.of(context).trans('Nom de la tache'),
+  //                       labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+  //                       enabledBorder: OutlineInputBorder(
+  //                         borderRadius: BorderRadius.circular(10),
+  //                         borderSide: BorderSide(
+  //                             color: Colors.grey
+  //                         ),
+  //                       )),
+  //                   onChanged: (nom) {
+  //                     nomtache = nom;
+  //                   }
+  //               ),
+  //             ),
+  //
+  //             Padding(
+  //               padding: const EdgeInsets.all(50),
+  //               child: TextFormField(
+  //
+  //                 controller: dateinput, //editing controller of this TextField
+  //                 decoration: InputDecoration(
+  //                   //icon: Icon(Icons.calendar_today), //icon of text field
+  //                     labelText: Locs.of(context).trans('Entrer une date') ,//label text of field
+  //                     labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+  //                     enabledBorder: OutlineInputBorder(
+  //                       borderRadius: BorderRadius.circular(10),
+  //                       borderSide: BorderSide(
+  //                           color: Colors.grey
+  //                       ),
+  //                     )
+  //                 ),
+  //                 readOnly: true,  //set it true, so that user will not able to edit text
+  //                 onTap: () async {
+  //
+  //                   DateTime? pickedDate = await showDatePicker(
+  //                     context: context, initialDate: DateTime.now(),
+  //                     firstDate: DateTime(1900), //DateTime.now() - not to allow to choose before today.
+  //                     lastDate: DateTime(2101),
+  //                   );
+  //
+  //                   unedateDebut = pickedDate!;
+  //
+  //
+  //                   if(pickedDate != null ){
+  //                     print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
+  //                     String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+  //                     print(formattedDate); //formatted date output using intl package =>  2021-03-16
+  //                     //you can implement different kind of Date Format here according to your requirement
+  //
+  //                     setState(() {
+  //                       dateinput.text = formattedDate; //set output date to TextField value.
+  //                     });
+  //                   }else{
+  //                     print("Date is not selected");
+  //                   }
+  //                 },
+  //               ),
+  //             ),
+  //
+  //             // Padding(
+  //             //   padding: const EdgeInsets.all(8.0),
+  //             //   child: Expanded(
+  //             //     child: MaterialButton(
+  //             //       onPressed:
+  //             //       creationtaches,
+  //             //       child: Text(Locs.of(context).trans('Accueil')),
+  //             //       color: Colors.blue,
+  //             //     ),
+  //             //   ),
+  //             // ),
+  //           ]
+  //       ),
+  //     ),
+  //   );
+  // }
 }

@@ -28,6 +28,8 @@ class _EcranAccueilState extends State<EcranAccueil> {
   //
   // List<> taches = [];
 
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> taches = [];
+
   bool dialogVisible = false;
 
   showLoaderDialog(BuildContext context){
@@ -50,10 +52,14 @@ class _EcranAccueilState extends State<EcranAccueil> {
 
   @override
   void initState() {
-    getTask();
+    loadData();
     initializeDateFormatting("fr-FR", null);
   }
 
+  void loadData() async {
+    taches = await getTask();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,9 +155,9 @@ class _EcranAccueilState extends State<EcranAccueil> {
                   ),
                 ),
 
-                // Expanded(
-                //   child:
-                //   ListTile(
+                 Expanded(
+                   child:
+                   ListTile(
                 //     onTap: () {
                 //       Navigator.push(
                 //         context,
@@ -162,17 +168,17 @@ class _EcranAccueilState extends State<EcranAccueil> {
                 //     },
                 //
                 //     // leading: Icon(Icons.percent),
-                //     title: Text(this.taches[index].percentageDone.toString() + "%",
-                //       style: TextStyle(
-                //         fontSize: 12.0,
-                //         fontWeight: FontWeight.w500,
-                //         fontStyle: FontStyle.italic,
-                //         //    color: Colors.red,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // Expanded(
+                    title: Text(taches[index].data()['percentageDone'].toString(),
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.italic,
+                        //    color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ),
+                //Expanded(
                 //   child: ListTile(
                 //     onTap: () {
                 //       Navigator.push(

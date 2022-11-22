@@ -5,6 +5,7 @@ import 'package:flutter_firebase/service.dart';
 
 import 'ecran_accueil.dart';
 import 'ecran_connexion.dart';
+import 'ecran_consultation.dart';
 import 'ecran_creation.dart';
 import 'firebase_options.dart';
 import 'i18n/intl_delegate.dart';
@@ -129,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
      // '/ecranservice': (context) => EcranService(),
 
-      // '/ecranconsultation': (context) => EcranConsultation(le_parametre: 0,),
+       '/ecranconsultation': (context) => EcranConsultation(le_parametre: 0,),
 
     };
   }
