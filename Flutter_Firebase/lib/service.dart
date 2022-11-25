@@ -37,4 +37,17 @@ import 'i18n/intl_localization.dart';
     }
   }
 
+  Future<DocumentSnapshot<Map<String, dynamic>>> getCurrentTask(String id) async{
+    try{
+      final db = FirebaseFirestore.instance;
+      var result = await db.collection("tasks").doc(id).get();
+      var doc = result;
+      return doc;
+    }
+    catch (e){
+      print (e);
+      throw(e);
+    }
+  }
+
 

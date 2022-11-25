@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
      // '/ecranservice': (context) => EcranService(),
 
-       '/ecranconsultation': (context) => EcranConsultation(le_parametre: 0,),
+       '/ecranconsultation': (context) => EcranConsultation(le_parametre: "",),
 
     };
   }

@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 // import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:intl/date_symbol_data_local.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
+import 'ecran_consultation.dart';
 import 'ecran_creation.dart';
 import 'i18n/intl_localization.dart';
 
@@ -134,18 +135,18 @@ class _EcranAccueilState extends State<EcranAccueil> {
                 Expanded(
                   child:
                   ListTile(
-                    // onTap: () {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
-                    //     ),
-                    //   );
-                    // },
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EcranConsultation(le_parametre: (taches[index].id)),
+                        ),
+                      );
+                    },
                     // leading: CircleAvatar(
                     //   backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()),
                     //   ),
-                    title: Text( taches[index].data()['name'],
+                    title: Text(taches[index].data()['name'],
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                   //      color: Colors.black,
