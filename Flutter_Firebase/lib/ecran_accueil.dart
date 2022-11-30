@@ -1,16 +1,19 @@
 
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/service.dart';
 import 'package:flutter_firebase/tiroir_nav.dart';
-import 'package:intl/intl.dart';
 // import 'package:kick_my_flutter/ecran_consultation.dart';
 // import 'package:kick_my_flutter/ecran_creation.dart';
 // import 'package:kick_my_flutter/lib_http.dart';
 // import 'package:kick_my_flutter/transfer.dart';
 // import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 import 'ecran_consultation.dart';
 import 'ecran_creation.dart';
@@ -49,7 +52,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
       },
     );
   }
-
 
   @override
   void initState() {
@@ -211,7 +213,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                 //     //     ),
                 //     //   );
                 //     // },
-                //     title: Text(DateFormat.yMd("fr_FR").format(this.taskdocs[index].data()['taskDateCreation']),
+                //     title: Text(taches[index].data()['taskDateCreation'],
                 //       style: TextStyle(
                 //       //  fontSize: 10.0,
                 //           fontWeight: FontWeight.w500,

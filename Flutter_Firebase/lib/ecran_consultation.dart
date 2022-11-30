@@ -38,7 +38,9 @@ class _EcranConsultationState extends State<EcranConsultation> {
   XFile? pickedImage;
   List<XFile>? pickedImages;
 
-  late final DocumentSnapshot<Map<String, dynamic>> latache;
+ // late final DocumentSnapshot<Task> taskDoc;
+
+  Task task = new Task();
 
   final picker = ImagePicker();
 
@@ -222,12 +224,19 @@ class _EcranConsultationState extends State<EcranConsultation> {
   // }
 
   @override
-  void initState() {
+  void initState()  {
    // getHttpdetailTache(widget.le_parametre);
   //  changepercentage(widget.le_parametre,nouveaupourcentage);
-
-    getCurrentTask(widget.le_parametre);
+    gettask();
+   // task = taskDoc.data()!;
     initializeDateFormatting("fr-FR", null);
+  }
+
+  gettask() async{
+    task = await getCurrentTask(widget.le_parametre);
+    setState(() {
+
+    });
   }
 
   @override
@@ -261,7 +270,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
                         flex: 2,
                         child:
                        // latache.data()['name']
-                        Text(Locs.of(context).trans('Nom de la tache') + " : " + latache.data()!['name']),
+                        Text(Locs.of(context).trans('Nom de la tache') + " : " + task.name),
                       ),
 
                       // Expanded(
