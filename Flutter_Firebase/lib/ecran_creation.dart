@@ -375,13 +375,15 @@ class _EcranCreationState extends State<EcranCreation> {
                            // Navigator.pop(context);
 
                            print("c");
+                           if(ok == true){
+                             Navigator.push(
+                               context,
+                               MaterialPageRoute(
+                                 builder: (context) => EcranAccueil(),
+                               ),
+                             );
+                           }
 
-                           Navigator.push(
-                             context,
-                             MaterialPageRoute(
-                               builder: (context) => EcranAccueil(),
-                             ),
-                           );
                          }
                          catch(e){
                            print("z");

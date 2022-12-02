@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'ecran_accueil.dart';
 import 'i18n/intl_localization.dart';
@@ -14,11 +15,12 @@ import 'i18n/intl_localization.dart';
 const snackBar = SnackBar(
   content: Text('Yay! A SnackBar!'),
 );
-
+  bool ok = false;
   Future<void> addTask(String nomtache,DateTime unedateDebut, DateTime unedateDefin, int percentageDone, String userid ) async{
     CollectionReference taskscollection = FirebaseFirestore.instance.collection("tasks");
     final db = FirebaseFirestore.instance;
     var results = await db.collection("tasks").where("name", isEqualTo: nomtache).where("userid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get();
+    ok = false;
     if(results.docs.isNotEmpty)
       {
         Fluttertoast.showToast(
@@ -31,7 +33,6 @@ const snackBar = SnackBar(
             fontSize: 16.0
         );
       }
-  //  bool verifiernom =  taskscollection.where("userid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).where("name", isEqualTo: nomtache) as bool;
     else if(nomtache.trim().isEmpty){
       Fluttertoast.showToast(
           msg: "Impossible de creer cette tache,le nom d'une tache ne doit pas comporter des espaces vides",
@@ -62,6 +63,7 @@ const snackBar = SnackBar(
         'percentageDone' : percentageDone,
         'userid' : userid,
       });
+      ok = true;
       return;
     }
   }
@@ -80,7 +82,7 @@ const snackBar = SnackBar(
     }
   }
 
-  Future<Task> getCurrentTask(id) async {
+  Future<Task> getCurrentTask(String id) async {
     try{
       final db = FirebaseFirestore.instance;
      CollectionReference taskscollection = db.collection("tasks");
@@ -91,7 +93,13 @@ const snackBar = SnackBar(
       currenttask.id = doc.id;
       currenttask.name = doc.get('name');
       currenttask.percentageDone = doc.get('percentageDone');
+      Timestamp letemps = doc.get('taskDateFin');
+      DateTime date = letemps.toDate();
+      currenttask.deadline = date;
+    //  currenttask.deadline = doc.get('taskDateFin');
 
+
+      // currenttask.percentageTimeSpent = doc.data()['percentageTimeSpent'];
       // currenttask.percentageTimeSpent = doc.data()['percentageTimeSpent'];
 
       return currenttask;
@@ -158,13 +166,21 @@ const snackBar = SnackBar(
     String id = "";
     String name = "";
     int percentageDone = 0;
-    // int? photoId = 0;
-    // double percentageTimeSpent = 0;
+
+    // @JsonKey(fromJson: _fromJson, toJson: _toJson)
+     DateTime deadline = DateTime.now();
+
+     int? photoId = 0;
+     double percentageTimeSpent = 0;
 
      factory  Task.fromJson(Map<String, dynamic> json) => Task();
      Task toJson() => Task();
 
   }
+
+  // final _dateFormatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss");
+  // DateTime _fromJson(String date) => _dateFormatter.parse(date);
+  // String _toJson(DateTime date) => _dateFormatter.format(date);
 
 
 

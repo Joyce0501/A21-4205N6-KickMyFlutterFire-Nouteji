@@ -170,63 +170,63 @@ class _EcranConsultationState extends State<EcranConsultation> {
   //   }
   // }
   //
-  // void changepercentage(int idtache, int percentage) async{
-  //
-  //   if(nouveaupourcentage == POURCENT_NON_MODIFIE)
-  //   {
-  //     nouveaupourcentage == taskdetailresponse.percentageDone;
-  //   }
-  //   else if(nouveaupourcentage > 100){
-  //     showDialog<String>(
-  //       context: context,
-  //       builder: (BuildContext context) => AlertDialog(
-  //         // title: const Text('AlertDialog Title'),
-  //         content:  Text(Locs.of(context).trans('Pourcentage doit etre inferieur ou egal a 100')),
-  //         actions: <Widget>[
-  //           TextButton(
-  //             onPressed: () => Navigator.pop(context, 'OK'),
-  //             child: const Text('OK'),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  //
-  //   else{
-  //     try{
-  //       WidgetsBinding.instance.addPostFrameCallback((_) {
-  //         showLoaderDialog(context);
-  //       });
-  //       var reponse = await taskpercentage(idtache, percentage);
-  //       taskdetailresponse.percentageDone = nouveaupourcentage;
-  //       print(reponse);
-  //       Navigator.pop(context);
-  //       setState(() {});
-  //
-  //     } catch (e) {
-  //       print(e);
-  //       Navigator.of(context).pop();
-  //       showDialog<String>(
-  //         context: context,
-  //         builder: (BuildContext context) => AlertDialog(
-  //           // title: const Text('AlertDialog Title'),
-  //           content:  Text(Locs.of(context).trans("Erreur réseau")),
-  //           actions: <Widget>[
-  //             TextButton(
-  //               onPressed: () => Navigator.pop(context, 'OK'),
-  //               child: const Text('OK'),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     }
-  //   }
-  // }
+  void changepercentage(String idtache, int percentage) async{
+
+    if(nouveaupourcentage == POURCENT_NON_MODIFIE)
+    {
+      nouveaupourcentage == task.percentageDone;
+    }
+    else if(nouveaupourcentage > 100){
+      // showDialog<String>(
+      //   context: context,
+      //   builder: (BuildContext context) => AlertDialog(
+      //     // title: const Text('AlertDialog Title'),
+      //     content:  Text(Locs.of(context).trans('Pourcentage doit etre inferieur ou egal a 100')),
+      //     actions: <Widget>[
+      //       TextButton(
+      //         onPressed: () => Navigator.pop(context, 'OK'),
+      //         child: const Text('OK'),
+      //       ),
+      //     ],
+      //   ),
+      // );
+    }
+
+    else{
+      try{
+        // WidgetsBinding.instance.addPostFrameCallback((_) {
+        //   showLoaderDialog(context);
+        // });
+        //var reponse = await taskpercentage(idtache, percentage);
+        task.percentageDone = nouveaupourcentage;
+      //  print(reponse);
+        Navigator.pop(context);
+        setState(() {});
+
+      } catch (e) {
+        print(e);
+        Navigator.of(context).pop();
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            // title: const Text('AlertDialog Title'),
+            content:  Text(Locs.of(context).trans("Erreur réseau")),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+  }
 
   @override
   void initState()  {
    // getHttpdetailTache(widget.le_parametre);
-  //  changepercentage(widget.le_parametre,nouveaupourcentage);
+    changepercentage(widget.le_parametre,nouveaupourcentage);
     gettask();
    // task = taskDoc.data()!;
     initializeDateFormatting("fr-FR", null);
@@ -234,9 +234,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
 
   gettask() async{
     task = await getCurrentTask(widget.le_parametre);
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -273,18 +271,17 @@ class _EcranConsultationState extends State<EcranConsultation> {
                         Text(Locs.of(context).trans('Nom de la tache') + " : " + task.name),
                       ),
 
-                      // Expanded(
-                      //   flex: 2,
-                      //   child:
-                      //   Text(Locs.of(context).trans('Date decheance de la tache') + " : " + DateFormat.yMd("fr_FR").format(taskdetailresponse.deadline)),
-                      // ),
+                      Expanded(
+                        flex: 2,
+                        child:
+                        Text(Locs.of(context).trans('Date decheance de la tache') + " : " + DateFormat.yMd("fr_FR").format(task.deadline)),
+                      ),
                       //
-                      // Expanded(
-                      //   flex: 2,
-                      //   child:
-                      //   Text(Locs.of(context).trans('Pourcentage davancement') + " : " + taskdetailresponse.percentageDone.toString()),
-                      //
-                      // ),
+                      Expanded(
+                        flex: 2,
+                        child:
+                        Text(Locs.of(context).trans('Pourcentage davancement') + " : " + task.percentageDone.toString()),
+                      ),
                       //
                       // Expanded(
                       //   flex: 2,
@@ -375,19 +372,19 @@ class _EcranConsultationState extends State<EcranConsultation> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Expanded(
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(8.0),
-                //     child: MaterialButton(
-                //       child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
-                //       color: Colors.blue,
-                //       onPressed: () {
-                //         changepercentage(widget.le_parametre, nouveaupourcentage);
-                //         setState(() {});
-                //       },
-                //     ),
-                //   ),
-                // ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: MaterialButton(
+                      child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
+                      color: Colors.blue,
+                      onPressed: () {
+                        changepercentage(widget.le_parametre, nouveaupourcentage);
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                ),
                 // Expanded(
                 //   child: Padding(
                 //     padding: const EdgeInsets.all(8.0),

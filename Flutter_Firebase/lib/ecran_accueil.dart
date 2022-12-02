@@ -161,14 +161,14 @@ class _EcranAccueilState extends State<EcranAccueil> {
                  Expanded(
                    child:
                    ListTile(
-                //     onTap: () {
-                //       Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //           builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
-                //         ),
-                //       );
-                //     },
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
+                        ),
+                      );
+                    },
                 //
                 //     // leading: Icon(Icons.percent),
                     title: Text(taches[index].data()['percentageDone'].toString(),
@@ -202,27 +202,27 @@ class _EcranAccueilState extends State<EcranAccueil> {
                 //   ),
                 //
                 // ),
-                // Expanded(
-                //   child:
-                //   ListTile(
-                //     // onTap: () {
-                //     //   Navigator.push(
-                //     //     context,
-                //     //     MaterialPageRoute(
-                //     //       builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
-                //     //     ),
-                //     //   );
-                //     // },
-                //     title: Text(taches[index].data()['taskDateCreation'],
-                //       style: TextStyle(
-                //       //  fontSize: 10.0,
-                //           fontWeight: FontWeight.w500,
-                //           //  color: Colors.black,
-                //         fontStyle: FontStyle.italic,
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                Expanded(
+                  child:
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
+                        ),
+                      );
+                    },
+                    title: Text(DateFormat.yMd("fr_FR").format(taches[index].data()['taskDateCreation'].toDate()).toString(),
+                      style: TextStyle(
+                      //  fontSize: 10.0,
+                          fontWeight: FontWeight.w500,
+                          //  color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             );
           },
