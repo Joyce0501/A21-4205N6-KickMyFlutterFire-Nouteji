@@ -361,12 +361,19 @@ class _EcranCreationState extends State<EcranCreation> {
                       onPressed: () async {
                          try{
                            print("a");
-
                            //showLoaderDialog(context);
-
                            await addTask(nomtache,unedateDebut,unedateFin,percentageDone,(FirebaseAuth.instance.currentUser?.uid).toString());
                            print("b");
-                           //Navigator.pop(context);
+
+                           // const snackBar = SnackBar(
+                           //   content: Text('Yay! A SnackBar!'),
+                           // );
+                           // // Find the ScaffoldMessenger in the widget tree
+                           // // and use it to show a SnackBar.
+                           // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                           //
+                           // Navigator.pop(context);
+
                            print("c");
 
                            Navigator.push(

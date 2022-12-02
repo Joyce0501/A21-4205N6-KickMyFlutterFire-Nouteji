@@ -5,9 +5,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'ecran_accueil.dart';
 import 'i18n/intl_localization.dart';
 
+
+const snackBar = SnackBar(
+  content: Text('Yay! A SnackBar!'),
+);
 
   Future<void> addTask(String nomtache,DateTime unedateDebut, DateTime unedateDefin, int percentageDone, String userid ) async{
     CollectionReference taskscollection = FirebaseFirestore.instance.collection("tasks");
@@ -15,14 +21,39 @@ import 'i18n/intl_localization.dart';
     var results = await db.collection("tasks").where("name", isEqualTo: nomtache).where("userid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get();
     if(results.docs.isNotEmpty)
       {
-        print("nom existant");
+        Fluttertoast.showToast(
+            msg: "Impossible de creer cette tache,ce nom de tache existe deja",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 5,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
       }
   //  bool verifiernom =  taskscollection.where("userid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).where("name", isEqualTo: nomtache) as bool;
-    else if(nomtache.trim().isEmpty || unedateDebut.isBefore(DateTime.now())){
-      print("erreur");
+    else if(nomtache.trim().isEmpty){
+      Fluttertoast.showToast(
+          msg: "Impossible de creer cette tache,le nom d'une tache ne doit pas comporter des espaces vides",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 5,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
     }
-
-
+    else if(unedateDebut.isBefore(DateTime.now())){
+      Fluttertoast.showToast(
+          msg: "Impossible de creer cette tache,la date de creation doit etre au minimum apres la date du jour ou egal a celle-ci",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 5,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }
     else{
       await taskscollection.add({
         'name' : nomtache,
