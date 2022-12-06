@@ -29,7 +29,8 @@ class _EcranCreationState extends State<EcranCreation> {
   String nomtache = "";
   DateTime unedateDebut = DateTime.now();
   DateTime unedateFin = DateTime.now();
-  late int percentageDone;
+  late int percentageDone = task.percentageDone;
+  Task task = new Task();
 
 //  List<HomeItemResponse> listetache = [];
 
@@ -249,22 +250,22 @@ class _EcranCreationState extends State<EcranCreation> {
                     }
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(50),
-                  child: TextFormField(
-                      decoration: InputDecoration(labelText: "Pourcentage",
-                          labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Colors.grey
-                            ),
-                          )),
-                      onChanged: (percentage) {
-                        percentageDone = int.parse(percentage);
-                      }
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(50),
+                //   child: TextFormField(
+                //       decoration: InputDecoration(labelText: "Pourcentage",
+                //           labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                //           enabledBorder: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //             borderSide: BorderSide(
+                //                 color: Colors.grey
+                //             ),
+                //           )),
+                //       onChanged: (percentage) {
+                //         percentageDone = int.parse(percentage);
+                //       }
+                //   ),
+                // ),
 
                 Padding(
                   padding: const EdgeInsets.all(50),

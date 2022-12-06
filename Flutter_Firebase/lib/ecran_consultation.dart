@@ -109,7 +109,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
   int nouveaupourcentage = POURCENT_NON_MODIFIE;
 
 
-//  TaskDetailResponse taskdetailresponse = TaskDetailResponse();
+ //  TaskDetailResponse taskdetailresponse = TaskDetailResponse();
 
   // showLoaderDialog(BuildContext context){
   //   AlertDialog alert=AlertDialog(
@@ -170,65 +170,67 @@ class _EcranConsultationState extends State<EcranConsultation> {
   //   }
   // }
   //
-  void changepercentage(String idtache, int percentage) async{
-
-    if(nouveaupourcentage == POURCENT_NON_MODIFIE)
-    {
-      nouveaupourcentage == task.percentageDone;
-    }
-    else if(nouveaupourcentage > 100){
-      // showDialog<String>(
-      //   context: context,
-      //   builder: (BuildContext context) => AlertDialog(
-      //     // title: const Text('AlertDialog Title'),
-      //     content:  Text(Locs.of(context).trans('Pourcentage doit etre inferieur ou egal a 100')),
-      //     actions: <Widget>[
-      //       TextButton(
-      //         onPressed: () => Navigator.pop(context, 'OK'),
-      //         child: const Text('OK'),
-      //       ),
-      //     ],
-      //   ),
-      // );
-    }
-
-    else{
-      try{
-        // WidgetsBinding.instance.addPostFrameCallback((_) {
-        //   showLoaderDialog(context);
-        // });
-        //var reponse = await taskpercentage(idtache, percentage);
-        task.percentageDone = nouveaupourcentage;
-      //  print(reponse);
-        Navigator.pop(context);
-        setState(() {});
-
-      } catch (e) {
-        print(e);
-        Navigator.of(context).pop();
-        showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            // title: const Text('AlertDialog Title'),
-            content:  Text(Locs.of(context).trans("Erreur réseau")),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
-    }
-  }
+  // void changepercentage(String idtache, int percentage) async{
+  //
+  //   if(nouveaupourcentage == POURCENT_NON_MODIFIE)
+  //   {
+  //     nouveaupourcentage == task.percentageDone;
+  //   }
+  //   else if(nouveaupourcentage > 100){
+  //     print ("pourcentage eleve");
+  //     // showDialog<String>(
+  //     //   context: context,
+  //     //   builder: (BuildContext context) => AlertDialog(
+  //     //     // title: const Text('AlertDialog Title'),
+  //     //     content:  Text(Locs.of(context).trans('Pourcentage doit etre inferieur ou egal a 100')),
+  //     //     actions: <Widget>[
+  //     //       TextButton(
+  //     //         onPressed: () => Navigator.pop(context, 'OK'),
+  //     //         child: const Text('OK'),
+  //     //       ),
+  //     //     ],
+  //     //   ),
+  //     // );
+  //   }
+  //
+  //   else{
+  //     try{
+  //       // WidgetsBinding.instance.addPostFrameCallback((_) {
+  //       //   showLoaderDialog(context);
+  //       // });
+  //       var reponse = await taskpercentage(idtache, percentage);
+  //       task.percentageDone = nouveaupourcentage;
+  //
+  //       task.percentageDone = taskpercentage(idtache, percentage) ;
+  //
+  //       print(reponse);
+  //       Navigator.pop(context);
+  //       setState(() {});
+  //
+  //     } catch (e) {
+  //       print(e);
+  //       Navigator.of(context).pop();
+  //       showDialog<String>(
+  //         context: context,
+  //         builder: (BuildContext context) => AlertDialog(
+  //           // title: const Text('AlertDialog Title'),
+  //           content:  Text(Locs.of(context).trans("Erreur réseau")),
+  //           actions: <Widget>[
+  //             TextButton(
+  //               onPressed: () => Navigator.pop(context, 'OK'),
+  //               child: const Text('OK'),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     }
+  //   }
+  // }
 
   @override
   void initState()  {
-   // getHttpdetailTache(widget.le_parametre);
-    changepercentage(widget.le_parametre,nouveaupourcentage);
     gettask();
-   // task = taskDoc.data()!;
+    getpercentage();
     initializeDateFormatting("fr-FR", null);
   }
 
@@ -236,7 +238,10 @@ class _EcranConsultationState extends State<EcranConsultation> {
     task = await getCurrentTask(widget.le_parametre);
     setState(() {});
   }
-
+  getpercentage() async{
+    task.percentageDone = await taskpercentage(widget.le_parametre, nouveaupourcentage);
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -378,13 +383,14 @@ class _EcranConsultationState extends State<EcranConsultation> {
                     child: MaterialButton(
                       child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
                       color: Colors.blue,
-                      onPressed: () {
-                        changepercentage(widget.le_parametre, nouveaupourcentage);
+                      onPressed: () async{
+                        await taskpercentage(widget.le_parametre, nouveaupourcentage);
                         setState(() {});
                       },
                     ),
                   ),
                 ),
+
                 // Expanded(
                 //   child: Padding(
                 //     padding: const EdgeInsets.all(8.0),

@@ -82,10 +82,25 @@ const snackBar = SnackBar(
     }
   }
 
+ Future taskpercentage(String idtache, int percentage) async {
+  try {
+    final db = FirebaseFirestore.instance;
+    var result = await db.collection("tasks").doc(idtache).get();
+    var doc = result;
+    var update = doc.data()?.update("percentageDone", (value) => percentage);
+
+
+  }
+  catch (e) {
+    print(e);
+    throw(e);
+  }
+ }
+
   Future<Task> getCurrentTask(String id) async {
     try{
       final db = FirebaseFirestore.instance;
-     CollectionReference taskscollection = db.collection("tasks");
+      CollectionReference taskscollection = db.collection("tasks");
       var result = await taskscollection.doc(id).get();
       var doc = result;
 
@@ -109,6 +124,7 @@ const snackBar = SnackBar(
       throw(e);
     }
   }
+
 
   // CollectionReference<Task> getTaskCollection() {
   //   return FirebaseFirestore.instance
