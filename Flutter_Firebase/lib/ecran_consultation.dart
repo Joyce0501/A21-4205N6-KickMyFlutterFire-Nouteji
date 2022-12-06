@@ -106,8 +106,9 @@ class _EcranConsultationState extends State<EcranConsultation> {
   //   }
   // }
 
-  int nouveaupourcentage = POURCENT_NON_MODIFIE;
+  // int nouveaupourcentage = POURCENT_NON_MODIFIE;
 
+  late int nouveaupourcentage ;
 
  //  TaskDetailResponse taskdetailresponse = TaskDetailResponse();
 
@@ -239,7 +240,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
     setState(() {});
   }
   getpercentage() async{
-    task.percentageDone = await taskpercentage(widget.le_parametre, nouveaupourcentage);
+    task.percentageDone == await taskpercentage(widget.le_parametre, nouveaupourcentage);
     setState(() {});
   }
   @override

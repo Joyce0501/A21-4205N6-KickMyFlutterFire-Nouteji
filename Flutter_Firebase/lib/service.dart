@@ -84,12 +84,13 @@ const snackBar = SnackBar(
 
  Future taskpercentage(String idtache, int percentage) async {
   try {
-    final db = FirebaseFirestore.instance;
-    var result = await db.collection("tasks").doc(idtache).get();
-    var doc = result;
-    var update = doc.data()?.update("percentageDone", (value) => percentage);
+  //  final db = FirebaseFirestore.instance;
+  //  var result = await db.collection("tasks").doc(idtache).get();
+  //  var doc = result;
+  //  var update = doc.data()?.update("percentageDone", (value) => percentage);
 
-
+    FirebaseFirestore.instance.collection('tasks').doc(idtache).update({'percentageDone': percentage});
+   // return update;
   }
   catch (e) {
     print(e);
