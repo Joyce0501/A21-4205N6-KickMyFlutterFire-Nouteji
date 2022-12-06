@@ -30,6 +30,7 @@ class _EcranCreationState extends State<EcranCreation> {
   DateTime unedateDebut = DateTime.now();
   DateTime unedateFin = DateTime.now();
   late int percentageDone = task.percentageDone;
+  String photourl = "";
   Task task = new Task();
 
 //  List<HomeItemResponse> listetache = [];
@@ -363,7 +364,7 @@ class _EcranCreationState extends State<EcranCreation> {
                          try{
                            print("a");
                            //showLoaderDialog(context);
-                           await addTask(nomtache,unedateDebut,unedateFin,percentageDone,(FirebaseAuth.instance.currentUser?.uid).toString());
+                           await addTask(nomtache,unedateDebut,unedateFin,percentageDone,(FirebaseAuth.instance.currentUser?.uid).toString(),photourl);
                            print("b");
 
                            // const snackBar = SnackBar(

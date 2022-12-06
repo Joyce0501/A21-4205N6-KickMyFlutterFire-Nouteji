@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/ecran_connexion.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'ecran_accueil.dart';
 import 'i18n/intl_localization.dart';
 
 
@@ -111,22 +112,22 @@ class LeTiroirState extends State<LeTiroir> {
           title: Text(texte),
         ),
 
-        // ListTile(
-        //   dense: true,
-        //   leading: Icon(Icons.home),
-        //   title: Text(Locs.of(context).trans('Accueil')),
-        //   onTap: () {
-        //     // TODO ferme le tiroir de navigation
-        //     Navigator.of(context).pop();
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => EcranAccueil(),
-        //       ),
-        //     );
-        //     // Then close the drawer
-        //   },
-        // ),
+        ListTile(
+          dense: true,
+          leading: Icon(Icons.home),
+          title: Text(Locs.of(context).trans('Accueil')),
+          onTap: () {
+            // TODO ferme le tiroir de navigation
+            Navigator.of(context).pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EcranAccueil(),
+              ),
+            );
+            // Then close the drawer
+          },
+        ),
         //
         // TODO le tiroir de navigation ne peut pointer que vers des
         // ecran sans paramtre.

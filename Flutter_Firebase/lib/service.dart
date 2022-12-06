@@ -1,9 +1,11 @@
 
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +18,7 @@ const snackBar = SnackBar(
   content: Text('Yay! A SnackBar!'),
 );
   bool ok = false;
-  Future<void> addTask(String nomtache,DateTime unedateDebut, DateTime unedateDefin, int percentageDone, String userid ) async{
+  Future<void> addTask(String nomtache,DateTime unedateDebut, DateTime unedateDefin, int percentageDone, String userid, String photourl) async{
     CollectionReference taskscollection = FirebaseFirestore.instance.collection("tasks");
     final db = FirebaseFirestore.instance;
     var results = await db.collection("tasks").where("name", isEqualTo: nomtache).where("userid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get();
@@ -62,6 +64,7 @@ const snackBar = SnackBar(
         'taskDateFin' :  unedateDefin,
         'percentageDone' : percentageDone,
         'userid' : userid,
+        'photourl' : photourl,
       });
       ok = true;
       return;
@@ -88,9 +91,21 @@ const snackBar = SnackBar(
   //  var result = await db.collection("tasks").doc(idtache).get();
   //  var doc = result;
   //  var update = doc.data()?.update("percentageDone", (value) => percentage);
-
-    FirebaseFirestore.instance.collection('tasks').doc(idtache).update({'percentageDone': percentage});
-   // return update;
+    if(percentage < 0 || percentage > 100)
+      {
+        Fluttertoast.showToast(
+            msg: "le pourcentage doit etre superieur et inferieur a 100",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 5,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+      }
+    else{
+      FirebaseFirestore.instance.collection('tasks').doc(idtache).update({'percentageDone': percentage});
+    }
   }
   catch (e) {
     print(e);
@@ -109,9 +124,11 @@ const snackBar = SnackBar(
       currenttask.id = doc.id;
       currenttask.name = doc.get('name');
       currenttask.percentageDone = doc.get('percentageDone');
+      currenttask.photourl = doc.get('photourl');
       Timestamp letemps = doc.get('taskDateFin');
       DateTime date = letemps.toDate();
       currenttask.deadline = date;
+
     //  currenttask.deadline = doc.get('taskDateFin');
 
 
@@ -125,6 +142,22 @@ const snackBar = SnackBar(
       throw(e);
     }
   }
+
+Future<String> sendPicture(String taskID, File file) async {
+
+    String imageURL = "";
+  DocumentReference imagesDoc = await FirebaseFirestore.instance.collection("tasks").doc(taskID);
+
+  Reference imageRef = FirebaseStorage.instance.ref(imagesDoc.id + 'jpg');
+  await imageRef.putFile(file);
+    imageURL = await imageRef.getDownloadURL();
+
+    imagesDoc.update({
+      'photourl' : imageURL
+    });
+    return imageURL;
+
+}
 
 
   // CollectionReference<Task> getTaskCollection() {
@@ -187,7 +220,7 @@ const snackBar = SnackBar(
     // @JsonKey(fromJson: _fromJson, toJson: _toJson)
      DateTime deadline = DateTime.now();
 
-     int? photoId = 0;
+     String photourl = "";
      double percentageTimeSpent = 0;
 
      factory  Task.fromJson(Map<String, dynamic> json) => Task();

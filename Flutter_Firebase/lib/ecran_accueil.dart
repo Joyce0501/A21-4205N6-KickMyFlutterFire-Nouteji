@@ -14,7 +14,7 @@ import 'package:flutter_firebase/tiroir_nav.dart';
 // import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'ecran_consultation.dart';
 import 'ecran_creation.dart';
 import 'i18n/intl_localization.dart';
@@ -88,51 +88,55 @@ class _EcranAccueilState extends State<EcranAccueil> {
           itemBuilder: (context, index) {
             return Row(
               children: [
-            //     Expanded(
-            //       child:
-            //       this.taches[index].photoId == 0?
-            //
-            // ListTile(
-            // onTap: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
-            //     ),
-            //   );
-            // },
-            //   title: Text(Locs.of(context).trans("Aucune image"),
-            //     style: TextStyle(
-            //       fontSize: 15.0,
-            //       fontWeight: FontWeight.w500,
-            //       fontStyle: FontStyle.italic,
-            //     ),
-            //   ),
-            // )
-            //
-            //   :
-            //       ListTile(
-            //         onTap: () {
-            //           Navigator.push(
-            //             context,
-            //             MaterialPageRoute(
-            //               builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
-            //             ),
-            //           );
-            //         },
-            //         title:
-            //      //   CircleAvatar(
-            //           // TODO : mettre une width par la suite
-            //       //    backgroundImage:
-            //           CachedNetworkImage(
-            //             imageUrl: 'http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=100",
-            //             placeholder: (context, url) => CircularProgressIndicator(),
-            //             errorWidget: (context, url, error) => Icon(Icons.error),
-            //           ),
-            //       //    NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=70"),
-            //       //  ),
-            //       ),
-            //     ),
+               Expanded(
+                  child:
+
+                  (taches[index].data()['photourl'] == null)  ?
+
+            ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EcranConsultation(le_parametre:taches[index].id),
+                ),
+              );
+            },
+              title: Text(Locs.of(context).trans("Aucune image"),
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w500,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            )
+
+              :
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EcranConsultation(le_parametre:taches[index].id),
+                        ),
+                      );
+                    },
+                    title:
+
+         //   (taches[index].data()['photourl']!='') ?Image.network(taches[index].data()['photourl']):Text("pas encore de photo")
+
+                 //   CircleAvatar(
+                      // TODO : mettre une width par la suite
+                  //    backgroundImage:
+                      CachedNetworkImage(
+                        imageUrl: taches[index].data()['photourl'],
+                        placeholder: (context, url) => CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                  //    NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=70"),
+                  //  ),
+                  ),
+               ),
 
                 Expanded(
                   child:
