@@ -127,8 +127,20 @@ const snackBar = SnackBar(
       currenttask.name = doc.get('name');
       currenttask.percentageDone = doc.get('percentageDone');
       currenttask.photourl = doc.get('photourl');
+
       Timestamp letemps = doc.get('taskDateFin');
       DateTime date = letemps.toDate();
+
+      Timestamp letempsdepart = doc.get('taskDateCreation');
+      DateTime dateStart = letempsdepart.toDate();
+
+      DateTime currentDate = DateTime.now();
+      int total = date.microsecondsSinceEpoch - dateStart.microsecondsSinceEpoch;
+      int spent = currentDate.microsecondsSinceEpoch - dateStart.microsecondsSinceEpoch;
+
+      double percentageTimeSpent = 100.0* spent/total;
+      currenttask.percentageTimeSpent = percentageTimeSpent;
+
       currenttask.deadline = date;
 
     //  currenttask.deadline = doc.get('taskDateFin');

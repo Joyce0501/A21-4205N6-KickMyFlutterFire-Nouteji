@@ -185,27 +185,27 @@ class _EcranAccueilState extends State<EcranAccueil> {
                     ),
                   ),
                 ),
-                //Expanded(
-                //   child: ListTile(
-                //     onTap: () {
-                //       Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //           builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
-                //         ),
-                //       );
-                //     },
-                //   //  leading: Icon(Icons.done_all_sharp),
-                //     title: Text( this.taches[index].percentageTimeSpent.toString(),
-                //       style: TextStyle(
-                //         fontSize: 12.0,
-                //         fontWeight: FontWeight.w500,
-                //         fontStyle: FontStyle.italic,
-                //       ),
-                //     ),
-                //   ),
-                //
-                // ),
+                Expanded(
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
+                        ),
+                      );
+                    },
+                  //  leading: Icon(Icons.done_all_sharp),
+                    title: Text( taches[index].data()['percentageSpent'].toString(),
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ),
+
+                ),
                 Expanded(
                   child:
                   ListTile(
