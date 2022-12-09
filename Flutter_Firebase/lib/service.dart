@@ -18,7 +18,8 @@ const snackBar = SnackBar(
   content: Text('Yay! A SnackBar!'),
 );
   bool ok = false;
-  Future<void> addTask(String nomtache,DateTime unedateDebut, DateTime unedateDefin, int percentageDone, String userid, String photourl) async{
+
+  Future<void> addTask(String nomtache,DateTime unedateDebut, DateTime unedateDefin, int percentageDone, int percentageSpent, String userid, String photourl) async{
     CollectionReference taskscollection = FirebaseFirestore.instance.collection("tasks");
     final db = FirebaseFirestore.instance;
     var results = await db.collection("tasks").where("name", isEqualTo: nomtache).where("userid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get();
@@ -63,6 +64,7 @@ const snackBar = SnackBar(
         'taskDateCreation' : unedateDebut,
         'taskDateFin' :  unedateDefin,
         'percentageDone' : percentageDone,
+        'percentageSpent' : percentageSpent,
         'userid' : userid,
         'photourl' : photourl,
       });
@@ -145,7 +147,7 @@ const snackBar = SnackBar(
 
 Future<String> sendPicture(String taskID, File file) async {
 
-    String imageURL = "";
+  String imageURL = "";
   DocumentReference imagesDoc = await FirebaseFirestore.instance.collection("tasks").doc(taskID);
 
   Reference imageRef = FirebaseStorage.instance.ref(imagesDoc.id + 'jpg');
@@ -155,8 +157,9 @@ Future<String> sendPicture(String taskID, File file) async {
     imagesDoc.update({
       'photourl' : imageURL
     });
-    return imageURL;
 
+  // getCurrentTask(taskID);
+  return imageURL;
 }
 
 
@@ -231,6 +234,7 @@ Future<String> sendPicture(String taskID, File file) async {
   // final _dateFormatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss");
   // DateTime _fromJson(String date) => _dateFormatter.parse(date);
   // String _toJson(DateTime date) => _dateFormatter.format(date);
+
 
 
 

@@ -30,8 +30,10 @@ class _EcranCreationState extends State<EcranCreation> {
   DateTime unedateDebut = DateTime.now();
   DateTime unedateFin = DateTime.now();
   late int percentageDone = task.percentageDone;
+  late int percentageSpent = 0;
   String photourl = "";
   Task task = new Task();
+
 
 //  List<HomeItemResponse> listetache = [];
 
@@ -50,6 +52,16 @@ class _EcranCreationState extends State<EcranCreation> {
       },
     );
   }
+
+  // percenatagespent
+  
+  //   Future<int>  percentage(DateTime start, DateTime current, DateTime end)
+  // {
+  //   Long total = (end.millisecondsSinceEpoch - start.millisecondsSinceEpoch) as Long;
+  //   Long spent = (current.millisecondsSinceEpoch - start.millisecondsSinceEpoch) as Long;
+  //   double percentage =  100.0 * spent / total;
+  //   return percentage;
+  // }
 
   // creationtaches() async{
   //   try {
@@ -364,7 +376,7 @@ class _EcranCreationState extends State<EcranCreation> {
                          try{
                            print("a");
                            //showLoaderDialog(context);
-                           await addTask(nomtache,unedateDebut,unedateFin,percentageDone,(FirebaseAuth.instance.currentUser?.uid).toString(),photourl);
+                           await addTask(nomtache,unedateDebut,unedateFin,percentageDone,percentageSpent,(FirebaseAuth.instance.currentUser?.uid).toString(),photourl);
                            print("b");
 
                            // const snackBar = SnackBar(
