@@ -41,6 +41,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
 
  // late final DocumentSnapshot<Task> taskDoc;
 
+
   Task task = new Task();
 
   final picker = ImagePicker();
@@ -65,6 +66,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
               print("fin de l'envoi , pensez a indiquer a l'utilisateur que ca charge " + DateTime.now().toString() );
 
               // TODO mettre a jour interface graphique
+              this.gettask();
             });
           }
       ).catchError(
@@ -275,11 +277,11 @@ class _EcranConsultationState extends State<EcranConsultation> {
                         Text(Locs.of(context).trans('Pourcentage davancement') + " : " + task.percentageDone.toString()),
                       ),
                       //
-                      // Expanded(
-                      //   flex: 2,
-                      //   child:
-                      //   Text(Locs.of(context).trans('Pourcentage de temps ecoule') + " : " + taskdetailresponse.percentageTimeSpent.toString()),
-                      // ),
+                      Expanded(
+                        flex: 2,
+                        child:
+                        Text(Locs.of(context).trans('Pourcentage de temps ecoule') + " : " + task.percentageTimeSpent.toString()),
+                      ),
 
                       Padding(
                         padding: const EdgeInsets.all(5),

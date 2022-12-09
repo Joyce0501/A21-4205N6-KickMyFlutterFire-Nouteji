@@ -30,7 +30,7 @@ class _EcranCreationState extends State<EcranCreation> {
   DateTime unedateDebut = DateTime.now();
   DateTime unedateFin = DateTime.now();
   late int percentageDone = task.percentageDone;
-  late int percentageSpent = 0;
+  late double percentageSpent = 0;
   String photourl = "";
   Task task = new Task();
 
@@ -53,124 +53,7 @@ class _EcranCreationState extends State<EcranCreation> {
     );
   }
 
-  // percenatagespent
-  
-  //   Future<int>  percentage(DateTime start, DateTime current, DateTime end)
-  // {
-  //   Long total = (end.millisecondsSinceEpoch - start.millisecondsSinceEpoch) as Long;
-  //   Long spent = (current.millisecondsSinceEpoch - start.millisecondsSinceEpoch) as Long;
-  //   double percentage =  100.0 * spent / total;
-  //   return percentage;
-  // }
 
-  // creationtaches() async{
-  //   try {
-  //     WidgetsBinding.instance.addPostFrameCallback((_) {
-  //       showLoaderDialog(context);
-  //     });
-  //     AddTaskRequest task = AddTaskRequest();
-  //     task.name = nomtache;
-  //     task.deadline = unedate;
-  //     var reponse = await addtask(task);
-  //     print(reponse);
-  //     Navigator.pop(context);
-  //
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => EcranAccueil(),
-  //       ),
-  //     );
-  //
-  //   } on DioError catch(e) {
-  //     print(e);
-  //     Navigator.of(context).pop();
-  //     if(e.response == null)
-  //     {
-  //       showDialog<String>(
-  //         context: context,
-  //         builder: (BuildContext context) => AlertDialog(
-  //           // title: const Text('AlertDialog Title'),
-  //           content:  Text(Locs.of(context).trans("Erreur réseau")),
-  //           actions: <Widget>[
-  //             TextButton(
-  //               onPressed: () => Navigator.pop(context, 'OK'),
-  //               child: const Text('OK'),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     }
-  //     else{
-  //       String message = e.response!.data;
-  //       if (message == "BadCredentialsException") {
-  //         print('login deja utilise');
-  //       }
-  //
-  //       else if(message == "Existing")
-  //       {
-  //         showDialog<String>(
-  //           context: context,
-  //           builder: (BuildContext context) => AlertDialog(
-  //             // title: const Text('AlertDialog Title'),
-  //             content: Text(Locs.of(context).trans("Le nom de tache entre existe deja")),
-  //             actions: <Widget>[
-  //               TextButton(
-  //                 onPressed: () => Navigator.pop(context, 'OK'),
-  //                 child: const Text('OK'),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       }
-  //
-  //       else if(message == "TooShort")
-  //       {
-  //         showDialog<String>(
-  //           context: context,
-  //           builder: (BuildContext context) => AlertDialog(
-  //             // title: const Text('AlertDialog Title'),
-  //             content: Text(Locs.of(context).trans("Le nom de tache entre est trop court")),
-  //             actions: <Widget>[
-  //               TextButton(
-  //                 onPressed: () => Navigator.pop(context, 'OK'),
-  //                 child: const Text('OK'),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       }
-  //
-  //       else if(message == "Empty")
-  //       {
-  //         showDialog<String>(
-  //           context: context,
-  //           builder: (BuildContext context) => AlertDialog(
-  //             // title: const Text('AlertDialog Title'),
-  //             content:  Text(Locs.of(context).trans("Nom de tache non entre")),
-  //             actions: <Widget>[
-  //               TextButton(
-  //                 onPressed: () => Navigator.pop(context, 'OK'),
-  //                 child: const Text('OK'),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       }
-  //       else {
-  //         print('autre erreurs');
-  //
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //             SnackBar(
-  //                 content: Text('Erreur ')
-  //             )
-  //         );
-  //       }
-  //     }
-  //
-  //   }
-  // }
-  
   @override
   void initState() {
   //  dateinput.text = "";
@@ -178,6 +61,7 @@ class _EcranCreationState extends State<EcranCreation> {
     super.initState();
   //  initFirebase();
   }
+
   //
   // void initFirebase() async{
   //   await Firebase.initializeApp();

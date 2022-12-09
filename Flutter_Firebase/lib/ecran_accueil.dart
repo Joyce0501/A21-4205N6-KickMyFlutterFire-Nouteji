@@ -34,6 +34,8 @@ class _EcranAccueilState extends State<EcranAccueil> {
 
   List<QueryDocumentSnapshot<Map<String, dynamic>>> taches = [];
 
+  Task task = new Task();
+
   bool dialogVisible = false;
 
   showLoaderDialog(BuildContext context){
@@ -61,6 +63,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
 
   void loadData() async {
     taches = await getTask();
+  //  task = await getCurrentTask(taches[34].id);
     setState(() {});
   }
 
@@ -196,7 +199,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                       );
                     },
                   //  leading: Icon(Icons.done_all_sharp),
-                    title: Text( taches[index].data()['percentageSpent'].toString(),
+                    title: Text(task.percentageTimeSpent.toString(),
                       style: TextStyle(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w500,

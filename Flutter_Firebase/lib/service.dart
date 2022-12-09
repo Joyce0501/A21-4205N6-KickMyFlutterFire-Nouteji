@@ -19,7 +19,7 @@ const snackBar = SnackBar(
 );
   bool ok = false;
 
-  Future<void> addTask(String nomtache,DateTime unedateDebut, DateTime unedateDefin, int percentageDone, int percentageSpent, String userid, String photourl) async{
+  Future<void> addTask(String nomtache,DateTime unedateDebut, DateTime unedateDefin, int percentageDone, double percentageSpent, String userid, String photourl) async{
     CollectionReference taskscollection = FirebaseFirestore.instance.collection("tasks");
     final db = FirebaseFirestore.instance;
     var results = await db.collection("tasks").where("name", isEqualTo: nomtache).where("userid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get();
@@ -50,6 +50,17 @@ const snackBar = SnackBar(
     else if(unedateDebut.isBefore(DateTime.now())){
       Fluttertoast.showToast(
           msg: "Impossible de creer cette tache,la date de creation doit etre au minimum apres la date du jour ou egal a celle-ci",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 5,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }
+    else if(unedateDefin.isBefore(unedateDebut)){
+      Fluttertoast.showToast(
+          msg: "Impossible de creer cette tache,la date de fin doit etre au minimum apres la date de création de la tache",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 5,
@@ -170,7 +181,6 @@ Future<String> sendPicture(String taskID, File file) async {
       'photourl' : imageURL
     });
 
-  // getCurrentTask(taskID);
   return imageURL;
 }
 
