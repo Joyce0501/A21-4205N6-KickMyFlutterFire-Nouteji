@@ -30,7 +30,8 @@
   "Deconnexion en cours..." :   "Deconnexion en cours..." ,
 
   "Creation de tache" : "Création de tache",
-  "Entrer une date" : "Entrer une date",
+  "Entrer une date de debut" : "Entrer une date de debut",
+  "Entrer une date de fin" : "Entrer une date d'echeance",
   "Nom de la tache" : "Nom de la tache",
   "Creation" : "Création",
   "Création de la tache en cours..." : "Création de la tache en cours...",
@@ -55,6 +56,9 @@
 
   "Ajout de taches" : "Ajout de taches",
 
-  "Deconnexion" : "Deconnexion"
+  "Deconnexion" : "Deconnexion",
+
+  "La date de debut de la tache doit etre au minimum apres la date du jour" : "La date de debut de la tache doit etre au minimum apres la date du jour",
+  "La date d'echeance doit etre au minimum apres la date de debut de la tache" : "La date d'echeance doit etre au minimum apres la date de debut de la tache"
 
 }

@@ -39,8 +39,6 @@ class _EcranConsultationState extends State<EcranConsultation> {
   XFile? pickedImage;
   List<XFile>? pickedImages;
 
- // late final DocumentSnapshot<Task> taskDoc;
-
 
   Task task = new Task();
 
@@ -94,127 +92,8 @@ class _EcranConsultationState extends State<EcranConsultation> {
     }
   }
 
-  // int nouveaupourcentage = POURCENT_NON_MODIFIE;
-
   late int nouveaupourcentage ;
 
- //  TaskDetailResponse taskdetailresponse = TaskDetailResponse();
-
-  // showLoaderDialog(BuildContext context){
-  //   AlertDialog alert=AlertDialog(
-  //     content: new Row(
-  //       children: [
-  //         CircularProgressIndicator(),
-  //         Container(margin: EdgeInsets.only(left: 7),child:Text( Locs.of(context).trans ("Changement en cours..." ))),
-  //       ],),
-  //   );
-  //   showDialog(barrierDismissible: false,
-  //     context:context,
-  //     builder:(BuildContext context){
-  //       return alert;
-  //     },
-  //   );
-  // }
-  //
-  // showLoaderDialogConsultation(BuildContext context){
-  //   AlertDialog alert=AlertDialog(
-  //     content: new Row(
-  //       children: [
-  //         CircularProgressIndicator(),
-  //         Container(margin: EdgeInsets.only(left: 7),child:Text( Locs.of(context).trans ("Chargement des détails..." ))),
-  //       ],),
-  //   );
-  //   showDialog(barrierDismissible: false,
-  //     context:context,
-  //     builder:(BuildContext context){
-  //       return alert;
-  //     },
-  //   );
-  // }
-  //
-  // void getHttpdetailTache(int iddoc) async {
-  //   try{
-  //     WidgetsBinding.instance.addPostFrameCallback((_) {
-  //       showLoaderDialogConsultation(context);
-  //     });
-  //     this.taskdetailresponse = await taskdetail(idtache);
-  //     Navigator.pop(context);
-  //     setState(() {});
-  //   } catch (e) {
-  //     print(e);
-  //     Navigator.of(context).pop();
-  //     showDialog<String>(
-  //       context: context,
-  //       builder: (BuildContext context) => AlertDialog(
-  //         // title: const Text('AlertDialog Title'),
-  //         content:  Text(Locs.of(context).trans("Erreur réseau")),
-  //         actions: <Widget>[
-  //           TextButton(
-  //             onPressed: () => Navigator.pop(context, 'OK'),
-  //             child: const Text('OK'),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  // }
-  //
-  // void changepercentage(String idtache, int percentage) async{
-  //
-  //   if(nouveaupourcentage == POURCENT_NON_MODIFIE)
-  //   {
-  //     nouveaupourcentage == task.percentageDone;
-  //   }
-  //   else if(nouveaupourcentage > 100){
-  //     print ("pourcentage eleve");
-  //     // showDialog<String>(
-  //     //   context: context,
-  //     //   builder: (BuildContext context) => AlertDialog(
-  //     //     // title: const Text('AlertDialog Title'),
-  //     //     content:  Text(Locs.of(context).trans('Pourcentage doit etre inferieur ou egal a 100')),
-  //     //     actions: <Widget>[
-  //     //       TextButton(
-  //     //         onPressed: () => Navigator.pop(context, 'OK'),
-  //     //         child: const Text('OK'),
-  //     //       ),
-  //     //     ],
-  //     //   ),
-  //     // );
-  //   }
-  //
-  //   else{
-  //     try{
-  //       // WidgetsBinding.instance.addPostFrameCallback((_) {
-  //       //   showLoaderDialog(context);
-  //       // });
-  //       var reponse = await taskpercentage(idtache, percentage);
-  //       task.percentageDone = nouveaupourcentage;
-  //
-  //       task.percentageDone = taskpercentage(idtache, percentage) ;
-  //
-  //       print(reponse);
-  //       Navigator.pop(context);
-  //       setState(() {});
-  //
-  //     } catch (e) {
-  //       print(e);
-  //       Navigator.of(context).pop();
-  //       showDialog<String>(
-  //         context: context,
-  //         builder: (BuildContext context) => AlertDialog(
-  //           // title: const Text('AlertDialog Title'),
-  //           content:  Text(Locs.of(context).trans("Erreur réseau")),
-  //           actions: <Widget>[
-  //             TextButton(
-  //               onPressed: () => Navigator.pop(context, 'OK'),
-  //               child: const Text('OK'),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     }
-  //   }
-  // }
 
   @override
   void initState()  {
@@ -309,43 +188,6 @@ class _EcranConsultationState extends State<EcranConsultation> {
               ),
             ),
 
-            // Row(
-            //   children: [
-            //     Expanded(
-            //       child:
-            //       //TODO au lieu de mettre directement le widget Image.network, on l'encapsule (on le wrap)
-            //       (taskdetailresponse.photoId == 0 ) ?
-            //       Text(Locs.of(context).trans('Aucune image pour cette tache'))
-            //           :
-            //       // dans un LayoutBuilder. Le LayoutBuilder nous permet d'avoir un nouveau build context
-            //       // uniquement pour le widget.
-            //       LayoutBuilder(
-            //           builder: (BuildContext context, BoxConstraints constraints) {
-            //
-            //             //TODO La MediaQuery permet de connaitre la taille disponible dans le build context,
-            //             // ici build context est uniquement pour le widget Image.network, c'est donc la taille disponible
-            //             // pour l'image
-            //             var size = MediaQuery.of(context).size;
-            //
-            //             //TODO la taille est en double, il sera important de convertir la taille en int
-            //             // pour que le serveur prenne notre requête (ex: 390 au lieu de 390.0)
-            //             String width = size.width.toInt().toString();
-            //
-            //             //TODO Une fois la taille connue, il suffit de la spécifier dans l'URL
-            //             return
-            //               CachedNetworkImage(
-            //                 imageUrl: 'http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString() +"?width=" +width, width: size.width,
-            //                 placeholder: (context, url) => CircularProgressIndicator(),
-            //                 errorWidget: (context, url, error) => Icon(Icons.error),
-            //               );
-            //             // Image.network("https://exercices-web.herokuapp.com/exos/image?&width="+width, width: size.width,);
-            //           }
-            //       ),
-            //     ),
-            //   ],
-            // ),
-
-
             Row(
               children: [
                 Expanded(
@@ -358,9 +200,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
                       placeholder: (context, url) => CircularProgressIndicator(),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
-                   // Image.network('http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString())
                 ),
-                //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
               ],
             ),
 
@@ -375,7 +215,12 @@ class _EcranConsultationState extends State<EcranConsultation> {
                       color: Colors.blue,
                       onPressed: () async{
                         await taskpercentage(widget.le_parametre, nouveaupourcentage);
-                        task.percentageDone = nouveaupourcentage;
+                        if(ok == true){
+                          task.percentageDone = nouveaupourcentage;
+                        }
+                        else{
+                          task.percentageDone = task.percentageDone;
+                        }
                         setState(() {});
                       },
                     ),

@@ -27,7 +27,7 @@ const snackBar = SnackBar(
     if(results.docs.isNotEmpty)
       {
         Fluttertoast.showToast(
-            msg: "Impossible de creer cette tache,ce nom de tache existe deja",
+            msg: "Ce nom de tache existe deja",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 5,
@@ -38,7 +38,7 @@ const snackBar = SnackBar(
       }
     else if(nomtache.trim().isEmpty){
       Fluttertoast.showToast(
-          msg: "Impossible de creer cette tache,le nom d'une tache ne doit pas comporter des espaces vides",
+          msg: "Le nom d'une tache ne doit pas comporter des espaces vides",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 5,
@@ -47,9 +47,9 @@ const snackBar = SnackBar(
           fontSize: 16.0
       );
     }
-    else if(unedateDebut.isBefore(DateTime.now())){
+    else if(unedateDebut.isBefore(DateTime.now()) || unedateDebut.isAtSameMomentAs(DateTime.now())){
       Fluttertoast.showToast(
-          msg: "Impossible de creer cette tache,la date de creation doit etre au minimum apres la date du jour ou egal a celle-ci",
+          msg: "La date de debut de la tache doit etre au minimum apres la date du jour",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 5,
@@ -58,9 +58,9 @@ const snackBar = SnackBar(
           fontSize: 16.0
       );
     }
-    else if(unedateDefin.isBefore(unedateDebut)){
+    else if(unedateDefin.isBefore(unedateDebut) || unedateDefin.isAtSameMomentAs(unedateDebut)){
       Fluttertoast.showToast(
-          msg: "Impossible de creer cette tache,la date de fin doit etre au minimum apres la date de création de la tache",
+          msg: "La date d'echeance doit etre au minimum apres la date de debut de la tache",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 5,
@@ -98,12 +98,10 @@ const snackBar = SnackBar(
     }
   }
 
+ bool okay = false;
  Future taskpercentage(String idtache, int percentage) async {
   try {
-  //  final db = FirebaseFirestore.instance;
-  //  var result = await db.collection("tasks").doc(idtache).get();
-  //  var doc = result;
-  //  var update = doc.data()?.update("percentageDone", (value) => percentage);
+    ok = false;
     if(percentage < 0 || percentage > 100)
       {
         Fluttertoast.showToast(
@@ -118,6 +116,7 @@ const snackBar = SnackBar(
       }
     else{
       FirebaseFirestore.instance.collection('tasks').doc(idtache).update({'percentageDone': percentage});
+      ok = true;
     }
   }
   catch (e) {

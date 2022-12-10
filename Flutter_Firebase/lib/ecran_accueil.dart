@@ -126,18 +126,11 @@ class _EcranAccueilState extends State<EcranAccueil> {
                     },
                     title:
 
-         //   (taches[index].data()['photourl']!='') ?Image.network(taches[index].data()['photourl']):Text("pas encore de photo")
-
-                 //   CircleAvatar(
-                      // TODO : mettre une width par la suite
-                  //    backgroundImage:
                       CachedNetworkImage(
                         imageUrl: taches[index].data()['photourl'],
                         placeholder: (context, url) => CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
-                  //    NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=70"),
-                  //  ),
                   ),
                ),
 
@@ -152,9 +145,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
                         ),
                       );
                     },
-                    // leading: CircleAvatar(
-                    //   backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()),
-                    //   ),
                     title: Text(taches[index].data()['name'],
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
@@ -176,8 +166,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
                         ),
                       );
                     },
-                //
-                //     // leading: Icon(Icons.percent),
                     title: Text(taches[index].data()['percentageDone'].toString(),
                       style: TextStyle(
                         fontSize: 12.0,
@@ -234,9 +222,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
             );
           },
         ),
-      // Column(
-      //
-      // ),
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {

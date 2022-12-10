@@ -30,7 +30,8 @@
   "Veuillez saisir des informations" : "Enter Information",
 
   "Creation de tache" : "Create a task",
-  "Entrer une date" : "Enter a date",
+  "Entrer une date de debut" : "Enter a start date",
+  "Entrer une date de fin" : "Enter a deadline",
   "Nom de la tache" : "Task's name",
   "Creation" : "Creation",
   "Création de la tache en cours..." : "Creating task in progress...",
@@ -56,5 +57,8 @@
 
   "Ajout de taches" : "Add tasks",
 
-  "Deconnexion" : "Deconnection"
+  "Deconnexion" : "Deconnection",
+
+  "La date de debut de la tache doit etre au minimum apres la date du jour" : "The start date must be after the date of the day",
+  "La date d'echeance doit etre au minimum apres la date de debut de la tache" : "The deadline must be at least after the start date of the task"
 }

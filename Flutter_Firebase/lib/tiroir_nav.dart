@@ -5,6 +5,7 @@ import 'package:flutter_firebase/ecran_connexion.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'ecran_accueil.dart';
+import 'ecran_creation.dart';
 import 'i18n/intl_localization.dart';
 
 
@@ -31,55 +32,6 @@ class LeTiroirState extends State<LeTiroir> {
       },
     );
   }
-
-  // deconnexion() async {
-  //   try {
-  //       WidgetsBinding.instance.addPostFrameCallback((_) {
-  //         showLoaderDialog(context);
-  //       });
-  //     var reponse = await signout();
-  //     print(reponse);
-  //     Navigator.pop(context);
-  //
-  //
-  //       Navigator.of(context)
-  //         .pushNamedAndRemoveUntil('/ecranconnexion', (Route<dynamic> route) => false);
-  //   }
-  //   on DioError catch(e) {
-  //     print(e);
-  //     Navigator.of(context).pop();
-  //     if(e.response == null)
-  //     {
-  //       showDialog<String>(
-  //         context: context,
-  //         builder: (BuildContext context) => AlertDialog(
-  //           // title: const Text('AlertDialog Title'),
-  //           content:  Text(Locs.of(context).trans("Erreur réseau")),
-  //           actions: <Widget>[
-  //             TextButton(
-  //               onPressed: () => Navigator.pop(context, 'OK'),
-  //               child: const Text('OK'),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     }
-  //     else{
-  //       String message = e.response!.data;
-  //       Navigator.of(context).pop();
-  //       if (message == "BadCredentialsException") {
-  //         print('login deja utilise');
-  //       } else {
-  //         print('autre erreurs');
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //             SnackBar(
-  //                 content: Text('Erreur authentification')
-  //             )
-  //         );
-  //       }
-  //     }
-  //   }
-  // }
 
   @override
   void initState() {
@@ -131,21 +83,21 @@ class LeTiroirState extends State<LeTiroir> {
         //
         // TODO le tiroir de navigation ne peut pointer que vers des
         // ecran sans paramtre.
-        // ListTile(
-        //   dense: true,
-        //   leading: Icon(Icons.add_task),
-        //   title: Text(Locs.of(context).trans('Ajout de taches')),
-        //   onTap: () {
-        //     Navigator.of(context).pop();
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => EcranCreation(),
-        //       ),
-        //     );
-        //     // Then close the drawer
-        //   },
-        // ),
+        ListTile(
+          dense: true,
+          leading: Icon(Icons.add_task),
+          title: Text(Locs.of(context).trans('Ajout de taches')),
+          onTap: () {
+            Navigator.of(context).pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EcranCreation(),
+              ),
+            );
+            // Then close the drawer
+          },
+        ),
 
         ListTile(
           dense: true,
